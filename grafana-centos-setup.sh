@@ -7,3 +7,4 @@ GF_SECURITY_ADMIN_PASSWORD="pass"\
 " > /etc/sysconfig/grafana-server;
 
 service grafana-server start
+
