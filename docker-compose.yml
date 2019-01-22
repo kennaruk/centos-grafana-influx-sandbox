@@ -3,6 +3,10 @@ services:
   centos_grafana:
     image: centos:7
     command: /sbin/init
+    ports:
+      - 3000:3000
   centos_influxdb:
     image: centos:7
     command: /sbin/init
+    ports:
+      - 8086:8086
