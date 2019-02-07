@@ -1,4 +1,4 @@
-# installing influxdb
+# install influxdb
 cat << EOF | tee /etc/yum.repos.d/influxdb.repo
 [influxdb]
 name = InfluxDB Repository - RHEL \$releasever
@@ -16,4 +16,5 @@ influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVI
 # enable authentication
 sed -i "s/# auth-enabled = false/auth-enabled = true/" /etc/influxdb/influxdb.conf ;
 
+# start service
 systemctl restart influxdb
