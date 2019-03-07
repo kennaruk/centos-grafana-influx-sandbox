@@ -87,3 +87,6 @@ setUpInfluxRepository
 
 debug "install and start influxdb"
 installAndStartInfluxDB
+
+debug "set Defaults (params, user, pass, etc)"
+setDefaults
