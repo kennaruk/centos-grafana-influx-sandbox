@@ -67,7 +67,9 @@ setDefaults() {
 	createDefaultInfluxAdmin $DBpassword
 	
 	PASS_FILE=$INFLUXETCDIR/$DBuser.pass
+
 	debug "Write password file at: $PASS_FILE"
+	createPassFile
 }
 
 createPassFile () {
