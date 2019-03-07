@@ -31,13 +31,13 @@ createDefaultInfluxAdmin() {
 
 	# TODO: Dynamic password here
 	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER $DBuser WITH PASSWORD '$1' WITH ALL PRIVILEGES\""
-	debug CREATE_ADMIN_QUERY
+	debug "$CREATE_ADMIN_QUERY"
 
 	while true ;
 	do
 		{ # try
-			CREATE_ADMIN_RESULT=$($CREATE_ADMIN_QUERY)
-			if [ "$CREATE_ADMIN_RESULT" = "" ]; then
+			CREATE_ADMIN_RESULT=$CREATE_ADMIN_QUERY
+			if [ "$CREATE_ADMIN_RESULT" == "" ]; then
 				break
 			fi
 		} || { # catch
