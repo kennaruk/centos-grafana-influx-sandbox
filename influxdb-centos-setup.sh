@@ -12,7 +12,7 @@ systemctl start influxdb ;
 
 # create authentication user
 RESULT=$(influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES") > result_from_add_user.log ;
-while [ $RESULT != "" ] 
+while [ "$RESULT" != "" ] 
 do
 	RESULT=$(influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES")
 done
