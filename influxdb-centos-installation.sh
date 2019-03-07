@@ -27,7 +27,7 @@ installAndStartInfluxDB() {
 }
 
 createDefaultInfluxAdmin() {
-	echo "Password parameter: $1"
+	debug "Password parameter: $1"
 
 	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER $DBuser WITH PASSWORD '$1' WITH ALL PRIVILEGES\""
 	debug "$CREATE_ADMIN_QUERY"
@@ -35,11 +35,12 @@ createDefaultInfluxAdmin() {
 	while true ;
 	do
 		{ # try
-			CREATE_ADMIN_RESULT=$($CREATE_ADMIN_QUERY)
+			CREATE_ADMIN_RESULT="$CREATE_ADMIN_QUERY"
 			if [ "$CREATE_ADMIN_RESULT" == "" ]; then
 				break
 			fi
 			debug "NOW RESULT: $CREATE_ADMIN_RESULT"
+			break
 		} || { # catch
 			debug "Something err: $CREATE_ADMIN_RESULT"
 		}
