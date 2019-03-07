@@ -11,7 +11,7 @@ yum install -y influxdb ;
 systemctl start influxdb ;
 
 # create authentication user
-influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES" ;
+influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES" > result_from_add_user.log ;
 
 # enable authentication
 sed -i "s/# auth-enabled = false/auth-enabled = true/" /etc/influxdb/influxdb.conf ;
