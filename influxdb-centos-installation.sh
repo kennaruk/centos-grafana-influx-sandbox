@@ -1,3 +1,9 @@
+debug() {
+	if [ "$DEBUG" == "*" ] ; then
+		echo $1
+	fi
+}
+
 installDependencies() {
 	yum install -y expect
 }
@@ -20,7 +26,7 @@ installAndStartInfluxDB() {
 
 createDefaultInfluxAdmin() {
 	echo "Password parameter: $1"
-	 
+
 	# TODO: Dynamic password here
 	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES\""
 	while true ;
@@ -35,6 +41,7 @@ createDefaultInfluxAdmin() {
 		}
 	done
 }
+
 getPassword () {
     word=`mkpasswd -l $1 -s 0 2>/dev/nul`
     echo $word
@@ -61,6 +68,11 @@ createPassFile () {
     chmod 600 $pass1 
 }
 
+debug "install dependencies"
 installDependencies
+
+debug "setup Influx repository"
 setUpInfluxRepository
+
+debug "install and start influxdb"
 installAndStartInfluxDB
