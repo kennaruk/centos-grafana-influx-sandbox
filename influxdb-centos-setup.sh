@@ -10,7 +10,7 @@ EOF
 yum install -y influxdb ;
 systemctl start influxdb ;
 
-sleep 2s ;
+sleep 1m ;
 influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES" ;
 # create authentication user
 # echo "influx fire" ;
