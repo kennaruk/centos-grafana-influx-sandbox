@@ -29,7 +29,6 @@ installAndStartInfluxDB() {
 createDefaultInfluxAdmin() {
 	echo "Password parameter: $1"
 
-	# TODO: Dynamic password here
 	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER $DBuser WITH PASSWORD '$1' WITH ALL PRIVILEGES\""
 	debug "$CREATE_ADMIN_QUERY"
 
@@ -59,15 +58,15 @@ getPassword () {
 }
 
 setDefaults() {
-	ETCDIR=/etc/influxdb # main conf file
-	VARDIR=/var/lib/influxdb # data storage
+	INFLUXETCDIR=/etc/influxdb # main conf file
+	INFLUXVARDIR=/var/lib/influxdb # data storage
 
 	DBuser="pragma_admin"
 	DBpassword=$(getPassword 10)
 
 	createDefaultInfluxAdmin $DBpassword
 	
-	PASS_FILE=$ETCDIR/$DBuser.pass
+	PASS_FILE=$INFLUXETCDIR/$DBuser.pass
 	debug "Write password file at: $PASS_FILE"
 }
 

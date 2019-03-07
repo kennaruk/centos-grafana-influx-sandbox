@@ -37,3 +37,9 @@ curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/ma
 ```
 curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-centos-installation.sh?$(date +%s) | INFLUX_INSTALLATION_DEBUG=* bash
 ```
+
+# test
+
+```
+curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/uninstall-influxdb.sh | bash ; curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-centos-installation.sh?$(date +%s) | INFLUX_INSTALLATION_DEBUG=* bash
+```
