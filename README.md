@@ -19,3 +19,15 @@ curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/ma
 ```
 curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-centos-installation.sh | bash
 ```
+
+or
+
+```
+curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-centos-installation.sh | INFLUX_INSTALLATION_DEBUG=* bash
+```
+
+# Uninstall InfluxDB
+
+```
+curl https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/uninstall-influxdb.sh | bash
+```

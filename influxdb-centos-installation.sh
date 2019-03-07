@@ -1,6 +1,8 @@
+#!/bin/bash
+
 debug() {
 	if [ "$INFLUX_INSTALLATION_DEBUG" == "*" ] ; then
-		echo $1
+		echo "DEBUG: $1"
 	fi
 }
 
