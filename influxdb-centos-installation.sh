@@ -68,6 +68,8 @@ createPassFile () {
     chmod 600 $pass1 
 }
 
+echo "INFLUX_INSTALLATION_DEBUG = $INFLUX_INSTALLATION_DEBUG"
+
 debug "install dependencies"
 installDependencies
 
