@@ -2,7 +2,7 @@
 
 debug() {
 	if [ "$INFLUX_INSTALLATION_DEBUG" == "*" ] ; then
-		echo "DEBUG: $1"
+		echo "==================== DEBUG: $1 ===================="
 	fi
 }
 
