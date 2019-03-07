@@ -30,7 +30,9 @@ createDefaultInfluxAdmin() {
 	echo "Password parameter: $1"
 
 	# TODO: Dynamic password here
-	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES\""
+	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER $DBuser WITH PASSWORD '$1' WITH ALL PRIVILEGES\""
+	debug CREATE_ADMIN_QUERY
+
 	while true ;
 	do
 		{ # try
@@ -39,9 +41,15 @@ createDefaultInfluxAdmin() {
 				break
 			fi
 		} || { # catch
-			echo "Something err: $CREATE_ADMIN_RESULT"
+			debug "Something err: $CREATE_ADMIN_RESULT"
 		}
 	done
+
+	# enable authentication
+	sed -i "s/# auth-enabled = false/auth-enabled = true/" /etc/influxdb/influxdb.conf
+
+	# restart service
+	systemctl restart influxdb
 }
 
 getPassword () {
@@ -59,15 +67,14 @@ setDefaults() {
 	createDefaultInfluxAdmin $DBpassword
 	
 	PASS_FILE=$ETCDIR/$DBuser.pass
-
-	influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES" 
+	debug "Write password file at: $PASS_FILE"
 }
 
 createPassFile () {
     # create a file with pasword for DB access, save previous if exist
-    saveFile $pass1
-    echo $DBPASSWD > $pass1
-    chmod 600 $pass1 
+    saveFile $PASS_FILE
+    echo $DBPASSWD > $PASS_FILE
+    chmod 600 $PASS_FILE 
 }
 
 echo "INFLUX_INSTALLATION_DEBUG = $INFLUX_INSTALLATION_DEBUG"
