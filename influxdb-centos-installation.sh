@@ -35,7 +35,7 @@ createDefaultInfluxAdmin() {
 	while true ;
 	do
 		{ # try
-			CREATE_ADMIN_RESULT=$(CREATE_ADMIN_QUERY)
+			CREATE_ADMIN_RESULT=$(eval "$CREATE_ADMIN_QUERY")
 			if [ "$CREATE_ADMIN_RESULT" == "" ]; then
 				break
 			fi
