@@ -36,10 +36,11 @@ createDefaultInfluxAdmin() {
 	while true ;
 	do
 		{ # try
-			CREATE_ADMIN_RESULT=$CREATE_ADMIN_QUERY
+			CREATE_ADMIN_RESULT=$($CREATE_ADMIN_QUERY)
 			if [ "$CREATE_ADMIN_RESULT" == "" ]; then
 				break
 			fi
+			debug "NOW RESULT: $CREATE_ADMIN_RESULT"
 		} || { # catch
 			debug "Something err: $CREATE_ADMIN_RESULT"
 		}
