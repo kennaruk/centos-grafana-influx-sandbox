@@ -9,11 +9,17 @@ gpgkey = https://repos.influxdata.com/influxdb.key
 EOF
 yum install -y influxdb ;
 systemctl start influxdb ;
-sleep 1s ;
+
+sleep 2s ;
+influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES" ;
 # create authentication user
-echo "influx fire" ;
-RESULT=$(influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES") ;
-echo "RESULT=$RESULT" ;
+# echo "influx fire" ;
+# {
+# 	RESULT=$(influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES") ;
+# } || {
+
+# }
+# echo "RESULT=$RESULT" ;
 # while [ "$RESULT" != "" ];
 # do
 # 	RESULT=$(influx -execute "CREATE USER kenadmin WITH PASSWORD 'kenpassword' WITH ALL PRIVILEGES")
