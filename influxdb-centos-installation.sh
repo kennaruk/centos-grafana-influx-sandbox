@@ -1,5 +1,5 @@
 debug() {
-	if [ "$DEBUG" == "*" ] ; then
+	if [ "$INFLUX_INSTALLATION_DEBUG" == "*" ] ; then
 		echo $1
 	fi
 }
