@@ -77,7 +77,7 @@ setDefaults() {
 
 createPassFile () {
     # create a file with pasword for DB access, save previous if exist
-    echo $DBPASSWD > $PASS_FILE
+    echo $DBpassword > $PASS_FILE
     chmod 600 $PASS_FILE 
 }
 
