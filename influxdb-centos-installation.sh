@@ -50,6 +50,9 @@ createDefaultInfluxAdmin() {
 
 	# restart service
 	systemctl restart influxdb
+
+	debug "INFLUXDB START"
+
 }
 
 getPassword () {
@@ -74,7 +77,6 @@ setDefaults() {
 
 createPassFile () {
     # create a file with pasword for DB access, save previous if exist
-    saveFile $PASS_FILE
     echo $DBPASSWD > $PASS_FILE
     chmod 600 $PASS_FILE 
 }
