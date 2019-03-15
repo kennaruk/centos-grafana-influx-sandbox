@@ -56,7 +56,7 @@ EOF
 createDefaultInfluxAdmin() {
 	debug "Creating default InfluxDB admin with user password..."
 
-	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER $DBuser WITH PASSWORD '$1' WITH ALL PRIVILEGES\""
+	CREATE_ADMIN_QUERY="influx -execute \"CREATE USER $1 WITH PASSWORD '$2' WITH ALL PRIVILEGES\""
 	debug "Query: $CREATE_ADMIN_QUERY"
 
 	while true ;
@@ -91,7 +91,7 @@ setDefaults() {
 	[[ -z "$DB_USER" ]] 		&& DB_USER=pragma_admin			
 	[[ -z "$DB_PASSWORD" ]] 	&& DB_PASSWORD=$(getPassword 10)	
 
-	createDefaultInfluxAdmin $DB_PASSWORD
+	createDefaultInfluxAdmin $DB_USER $DB_PASSWORD
 	createPassFile
 }
 

@@ -1,7 +1,17 @@
-**RUN THESE SCRIPTS WITH SU PERMISSION**
+### RUN THESE SCRIPTS WITH SU PERMISSION
 
 ```#!/bin/bash
 curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-install/influxdb-install.sh
 chmod +x ./influxdb-install.sh
 ./influxdb-install.sh
+
+```
+
+### With no cache (for test)
+
+```#!/bin/bash
+curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-install/influxdb-install.sh?$(date +%s)
+chmod +x ./influxdb-install.sh
+./influxdb-install.sh
+
 ```
