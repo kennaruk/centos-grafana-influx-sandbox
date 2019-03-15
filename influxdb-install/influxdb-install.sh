@@ -6,7 +6,9 @@ setUpConstants() {
 	THIS_FILE_EXTENSION="${THIS_FILE#*.}"
 	THIS_FILE_NAME=$(basename $THIS_FILE .$THIS_FILE_EXTENSION)
 
-	LOG_FILE="/var/log/$THIS_FILE_NAME/$(date +%Y-%m-%d_%H-%M-%S).log"
+	LOG_DIR="/var/log/$THIS_FILE_NAME"
+	mkdir -p $LOG_DIR
+	LOG_FILE="$LOG_DIR/$(date +%Y-%m-%d_%H-%M-%S).log"
 	echo "Log will be written at $LOG_FILE"
 }
 

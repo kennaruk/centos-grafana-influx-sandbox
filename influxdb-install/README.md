@@ -1,11 +1,7 @@
-```
-influxdb-install.sh configure.txt
-```
+**RUN THESE SCRIPTS WITH SU PERMISSION**
 
-```
-/var/log/influxdb-install/$(date +%Y-%m-%d_%H-%M-%S).log
-```
-
-```
-influxdb-install.sh configure.txt
+```#!/bin/bash
+curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-install/influxdb-install.sh
+chmod +x ./influxdb-install.sh
+./influxdb-install.sh
 ```
