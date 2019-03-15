@@ -10,6 +10,8 @@ setUpConstants() {
 	mkdir -p $LOG_DIR
 	LOG_FILE="$LOG_DIR/$(date +%Y-%m-%d_%H-%M-%S).log"
 	echo "Log will be written at $LOG_FILE"
+
+	SLEEP_TIME=0.5s
 }
 
 debug() {
@@ -50,6 +52,8 @@ EOF
 
 	debug "Starting InfluxDB background process..."
 	systemctl start influxdb 2>>$LOG_FILE
+	sleep $SLEEP_TIME	 # Waiting for influxdb service start properly
+
 	exitIfHaveError
 }
 
@@ -66,6 +70,7 @@ createDefaultInfluxAdmin() {
 			break
 		fi
 		debug "Query result: $CREATE_ADMIN_RESULT"
+		sleep $SLEEP_TIME	 # Waiting for influxdb service start properly
 	done
 
 	# enable authentication
