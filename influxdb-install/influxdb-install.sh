@@ -83,7 +83,6 @@ createDefaultInfluxAdmin() {
 }
 
 getPassword () {
-	debug "Generating random password..."
     word=`mkpasswd -l $1 -s 0 2>>$LOG_FILE`
     echo $word
 }
@@ -93,7 +92,9 @@ setDefaults() {
 	[[ -z "$DB_STORAGE_DIR" ]] 	&& DB_STORAGE_DIR=/var/lib/influxdb 	# data storage
 
 	[[ -z "$DB_PORT" ]] 		&& DB_PORT=8086			
-	[[ -z "$DB_USER" ]] 		&& DB_USER=pragma_admin			
+	[[ -z "$DB_USER" ]] 		&& DB_USER=pragma_admin		
+
+	debug "Generating random password..."
 	[[ -z "$DB_PASSWORD" ]] 	&& DB_PASSWORD=$(getPassword 10)	
 
 	createDefaultInfluxAdmin $DB_USER $DB_PASSWORD
@@ -104,7 +105,7 @@ createPassFile () {
     # create a file with pasword for DB access, save previous if exist
 	PASS_FILE=$DB_CONF_DIR/$DB_USER.pass
 
-	debug "Writing password file at $PASS_FILE..."
+	debug "Writing password file at $PASS_FILE"
     echo $DB_PASSWORD > $PASS_FILE 2>>$LOG_FILE
     chmod 600 $PASS_FILE 
 }
