@@ -21,9 +21,9 @@ debug() {
 
 exitIfHaveError() {
 	error_code=${PIPESTATUS[0]}
-	debug "Error code from last command is $error_code"
 
 	if [ $error_code -ne 0 ] ; then
+		debug "Error code from last command is $error_code"
 		echo "Error! exit!"
 		exit $error_code
 	fi
