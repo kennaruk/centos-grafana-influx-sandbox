@@ -12,11 +12,18 @@ setUpConstants() {
 	echo "Log will be written at $LOG_FILE"
 
 	SLEEP_TIME=0.5s
+
+	BOLD=$(tput bold)
+	ESCAPE_BOLD="\[1m"
+
+	NORMAL=$(tput sgr0)
+	ESCAPE_NORMAL="(B\[m"
+
 }
 
 debug() {
 	message=$1
-	echo $message | tee -a $LOG_FILE
+	echo $BOLD$message$NORMAL | sed "s/$ESCAPE_BOLD//g;s/$ESCAPE_NORMAL//g" | tee -a $LOG_FILE
 }
 
 exitIfHaveError() {
