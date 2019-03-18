@@ -1,6 +1,8 @@
 #!/bin/bash
 
 setUpConstants() {
+	echo "Setting up constants..."
+
 	# Preparing log destination refers to script file name
 	THIS_FILE=$(basename "$0")
 	THIS_FILE_EXTENSION="${THIS_FILE#*.}"
@@ -37,12 +39,16 @@ exitIfHaveError() {
 }
 
 installDependencies() {
+	debug "Installing dependencies..."
+
 	debug "Installing expect package..."
 	yum install -y expect 2>>$LOG_FILE 		# for mkpasswd 
 	exitIfHaveError
 }
 
 installAndStartInfluxDB() {
+	debug "Installing and starting influxdb..."
+	
 	debug "Setting up InfluxDB repository..."
 cat << EOF | tee /etc/yum.repos.d/influxdb.repo
 [influxdb]
@@ -89,20 +95,54 @@ createDefaultInfluxAdmin() {
 	exitIfHaveError
 }
 
+parse() {
+  echo $1 | awk -F'=' '{print $2}'
+}
+
+readingConfigFile() {
+	file = $1
+	if [ -z "$1"] ; then
+		debug "Don't have configuration file"
+		return
+	fi
+
+	debug "Reading configuration from file $file"
+
+	if [ ! -f $file ] ; then
+		debug "File $file not found"
+		return
+	fi
+
+	while IFS= read -r line; do
+		case $line in
+			DB_CONF_DIR\=* )	DB_CONF_DIR=`parse $line` ;;
+			DB_STORAGE_DIR\=* ) DB_STORAGE_DIR=`parse $line` ;;
+			DB_PORT\=* )     	DB_PORT=`parse $line` ;;
+			DB_USER\=* )    	DB_USER=`parse $line` ;;
+			DB_PASSWORD\=* )    DB_PASSWORD=`parse $line` ;;
+			* )           ;;
+		esac
+	done < $FILE
+}
+
 getPassword () {
     word=`mkpasswd -l $1 -s 0 2>>$LOG_FILE`
     echo $word
 }
 
 setDefaults() {
+	debug "Set defaults variable and configure InfluxDB"
+
 	[[ -z "$DB_CONF_DIR" ]] 	&& DB_CONF_DIR=/etc/influxdb 			# main conf file
 	[[ -z "$DB_STORAGE_DIR" ]] 	&& DB_STORAGE_DIR=/var/lib/influxdb 	# data storage
 
 	[[ -z "$DB_PORT" ]] 		&& DB_PORT=8086			
 	[[ -z "$DB_USER" ]] 		&& DB_USER=pragma_admin		
 
-	debug "Generating random password..."
-	[[ -z "$DB_PASSWORD" ]] 	&& DB_PASSWORD=$(getPassword 10)	
+	if [ -z "$DB_PASSWORD" ] ; then
+		debug "Generating random password..."
+		DB_PASSWORD=$(getPassword 10)
+	fi
 
 	createDefaultInfluxAdmin $DB_USER $DB_PASSWORD
 	createPassFile
@@ -117,20 +157,10 @@ createPassFile () {
     chmod 600 $PASS_FILE 
 }
 
-
-echo "Setting up constants..."
+## MAIN ##
 setUpConstants
-
-debug "Installing dependencies..."
 installDependencies
-
-debug "Installing and starting influxdb..."
 installAndStartInfluxDB
-
-debug "Reading configuration from file $1"
-source $1 2>>$LOG_FILE
-
-debug "Set defaults variable and configure InfluxDB"
+readingConfigFile $1
 setDefaults
-
 debug "InfluxDB succesfully install at $(date '+%Y-%m-%d %H:%M:%S')"
