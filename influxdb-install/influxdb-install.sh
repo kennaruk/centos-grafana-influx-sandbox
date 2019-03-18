@@ -108,8 +108,6 @@ readingConfigFile() {
 
 	while IFS= read -r line; do
 		case $line in
-			DB_CONF_DIR\=* )	DB_CONF_DIR=`parse $line` ;;
-			DB_STORAGE_DIR\=* ) DB_STORAGE_DIR=`parse $line` ;;
 			DB_PORT\=* )     	DB_PORT=`parse $line` ;;
 			DB_USER\=* )    	DB_USER=`parse $line` ;;
 			DB_PASSWORD\=* )    DB_PASSWORD=`parse $line` ;;
@@ -126,9 +124,6 @@ getPassword () {
 setDefaults() {
 	debug "Set defaults variable and configure InfluxDB"
 
-	[[ -z "$DB_CONF_DIR" ]] 	&& DB_CONF_DIR=/etc/influxdb 			# main conf file
-	[[ -z "$DB_STORAGE_DIR" ]] 	&& DB_STORAGE_DIR=/var/lib/influxdb 	# data storage
-
 	[[ -z "$DB_PORT" ]] 		&& DB_PORT=8086			
 	[[ -z "$DB_USER" ]] 		&& DB_USER=pragma_admin		
 
@@ -137,7 +132,11 @@ setDefaults() {
 		DB_PASSWORD=$(getPassword 10)
 	fi
 
+	# Change bind port
+	sed -i "s/# bind-address = \":8086\"/bind-address = \":$DB_PORT\"/" /etc/influxdb/influxdb.conf
+
 	createDefaultInfluxAdmin $DB_USER $DB_PASSWORD
+
 	createPassFile
 }
 
