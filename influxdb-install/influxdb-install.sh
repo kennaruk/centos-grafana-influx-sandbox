@@ -14,18 +14,11 @@ setUpConstants() {
 	echo "Log will be written at $LOG_FILE"
 
 	SLEEP_TIME=0.5s
-
-	BOLD=$(tput bold)
-	ESCAPE_BOLD="\[1m"
-
-	NORMAL=$(tput sgr0)
-	ESCAPE_NORMAL="(B\[m"
-
 }
 
 debug() {
 	message=$1
-	echo $BOLD$message$NORMAL | sed "s/$ESCAPE_BOLD//g;s/$ESCAPE_NORMAL//g" | tee -a $LOG_FILE
+	echo $message | tee -a $LOG_FILE
 }
 
 exitIfHaveError() {
@@ -100,8 +93,8 @@ parse() {
 }
 
 readingConfigFile() {
-	file = $1
-	if [ -z "$1"] ; then
+	file=$1
+	if [ -z "$1" ] ; then
 		debug "Don't have configuration file"
 		return
 	fi
@@ -122,7 +115,7 @@ readingConfigFile() {
 			DB_PASSWORD\=* )    DB_PASSWORD=`parse $line` ;;
 			* )           ;;
 		esac
-	done < $FILE
+	done < $file
 }
 
 getPassword () {
