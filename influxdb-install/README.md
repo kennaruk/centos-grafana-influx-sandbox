@@ -33,3 +33,12 @@ chmod +x ./influxdb-install.sh
 ./influxdb-install.sh
 
 ```
+
+### Summary
+
+```#!/bin/bash
+curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-install/influxdb-install.sh
+chmod +x ./influxdb-install.sh
+curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/influxdb-install/influxdb.config.example
+./influxdb-install.sh influxdb.config.example
+```
