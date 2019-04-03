@@ -17,7 +17,7 @@ chmod +x ./influxdb-install.sh
 Without configuration
 
 ```#!/bin/bash
-./influxdb-install.sh influxdb.config.example
+./influxdb-install.sh
 ```
 
 With custom configuration

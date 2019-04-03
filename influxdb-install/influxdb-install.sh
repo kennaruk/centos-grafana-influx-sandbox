@@ -16,6 +16,7 @@ setUpConstants() {
 	LOG_DIR="/var/log/$THIS_FILE_NAME"
 	mkdir -p $LOG_DIR
 	LOG_FILE="$LOG_DIR/$(date +%Y-%m-%d_%H-%M-%S).log"
+	touch LOG_FILE
 	echo "Log will be written at $LOG_FILE"
 
 	SLEEP_TIME=0.5s

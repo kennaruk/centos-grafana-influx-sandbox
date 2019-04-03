@@ -17,7 +17,7 @@ chmod +x ./grafana-install.sh
 Without configuration
 
 ```#!/bin/bash
-./grafana-install.sh grafana.config.example
+./grafana-install.sh
 ```
 
 With custom configuration
