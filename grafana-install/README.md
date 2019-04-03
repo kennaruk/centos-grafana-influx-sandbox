@@ -9,7 +9,7 @@ curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox
 How to use
 
 ```#!/bin/bash
-https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/grafana-install/grafana-install.sh
+curl -O https://raw.githubusercontent.com/kennaruk/centos-grafana-influx-sandbox/master/grafana-install/grafana-install.sh
 chmod +x ./grafana-install.sh
 ./grafana-install.sh
 ```

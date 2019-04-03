@@ -61,11 +61,11 @@ modifyGrafanaConfiguration() {
 	if grep -Fq "$MODIFY_VARIABLE" $GF_SYS_CONF_FILE
 	then # already have configuration
 		sed -i "s/$MODIFY_VARIABLE=.*/$MODIFY_PHRASE/g" $GF_SYS_CONF_FILE 2>>$LOG_FILE
-		debug "Replace config to $MODIFY_PHRASE"
+		debug "Replace config $MODIFY_PHRASE at $GF_SYS_CONF_FILE"
 		exitIfHaveError
 	else # not found configuration
 		echo "$MODIFY_PHRASE" >> $GF_SYS_CONF_FILE
-		debug "Add config $MODIFY_PHRASE to file"
+		debug "Add config $MODIFY_PHRASE to $GF_SYS_CONF_FILE"
 	fi
 }
 
