@@ -1,0 +1,3 @@
+### RUN THESE SCRIPTS WITH SU PERMISSION
+
+Installation script

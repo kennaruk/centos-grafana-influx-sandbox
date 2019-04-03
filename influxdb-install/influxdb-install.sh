@@ -1,5 +1,10 @@
 #!/bin/bash
 
+debug() { # Call this function with string parameter which will parse to std:output and log file
+	message=$1
+	echo $message | tee -a $LOG_FILE
+}
+
 setUpConstants() {
 	echo "Setting up constants..."
 
@@ -16,12 +21,8 @@ setUpConstants() {
 	SLEEP_TIME=0.5s
 }
 
-debug() {
-	message=$1
-	echo $message | tee -a $LOG_FILE
-}
 
-exitIfHaveError() {
+exitIfHaveError() { # Call this function after execute commands to check exit code (error or not)
 	error_code=${PIPESTATUS[0]}
 
 	if [ $error_code -ne 0 ] ; then
