@@ -76,8 +76,8 @@ modifyGrafanaConfigurationAndRestart() {
 	modifyGrafanaConfiguration "GF_AUTH_ANONYMOUS_ENABLED" $GF_AUTH_ANONYMOUS_ENABLED
 	modifyGrafanaConfiguration "GF_SECURITY_ADMIN_USER" $GF_SECURITY_ADMIN_USER
 	modifyGrafanaConfiguration "GF_SECURITY_ADMIN_PASSWORD" $GF_SECURITY_ADMIN_PASSWORD
-	modifyGrafanaConfiguration "GF_SERVER_HTTP_PORT" $GF_SERVER_HTTP_PORT
-	modifyGrafanaConfiguration "GF_SERVER_ROOT_URL" $GF_SERVER_ROOT_URL:$GF_SERVER_HTTP_PORT
+	# modifyGrafanaConfiguration "GF_SERVER_HTTP_PORT" $GF_SERVER_HTTP_PORT
+	# modifyGrafanaConfiguration "GF_SERVER_ROOT_URL" $GF_SERVER_ROOT_URL:$GF_SERVER_HTTP_PORT
 
 	service grafana-server restart 2>>$LOG_FILE
 	exitIfHaveError
@@ -126,9 +126,9 @@ setDefaults() {
 
 	[[ -z "$GF_AUTH_ANONYMOUS_ENABLED" ]] 	&& GF_AUTH_ANONYMOUS_ENABLED=false
 	[[ -z "$GF_SECURITY_ADMIN_USER" ]] 		&& GF_SECURITY_ADMIN_USER=pragma_admin
-	[[ -z "$GF_SERVER_HTTP_PORT" ]] 		&& GF_SERVER_HTTP_PORT=3000			
-	[[ -z "$GF_SERVER_ROOT_URL" ]] 			&& GF_SERVER_ROOT_URL=http://localhost	
-	[[ -z "$CONF_DIR" ]] 					&& CONF_DIR=/etc/grafana
+	# [[ -z "$GF_SERVER_HTTP_PORT" ]] 		&& GF_SERVER_HTTP_PORT=3000			
+	# [[ -z "$GF_SERVER_ROOT_URL" ]] 			&& GF_SERVER_ROOT_URL=http://localhost	
+	# [[ -z "$CONF_DIR" ]] 					&& CONF_DIR=/etc/grafana
 
 	if [ -z "$GF_SECURITY_ADMIN_PASSWORD" ] ; then
 		debug "Generating random password..."
