@@ -52,6 +52,10 @@ EOF
 	exitIfHaveError
 }
 
+parse() {
+  echo $1 | awk -F'=' '{print $2}'
+}
+
 readingConfigFile() {
 	file=$1
 	if [ -z "$1" ] ; then
