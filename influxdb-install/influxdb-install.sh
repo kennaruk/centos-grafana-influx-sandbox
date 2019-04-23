@@ -140,6 +140,7 @@ setDefaults() {
 
 	# Change bind port
 	sed -i "s/# bind-address = \":8086\"/bind-address = \":$DB_PORT\"/" /etc/influxdb/influxdb.conf
+	exitIfHaveError
 
 	createDefaultInfluxAdmin $DB_USER $DB_PASSWORD
 
