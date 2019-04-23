@@ -116,5 +116,5 @@ setDefaultsAndStartTelegraf() {
 setUpConstants
 installDependencies
 installTelegraf
-readingConfigFile
+readingConfigFile $1
 setDefaultsAndStartTelegraf
