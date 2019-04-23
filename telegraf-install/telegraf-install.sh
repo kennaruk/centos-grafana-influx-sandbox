@@ -122,3 +122,4 @@ installDependencies
 installTelegraf
 readingConfigFile $1
 setDefaultsAndStartTelegraf
+debug "Telegraf succesfully install at $(date '+%Y-%m-%d %H:%M:%S')"
